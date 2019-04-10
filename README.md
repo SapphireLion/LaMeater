@@ -1,15 +1,9 @@
-# LaMeater - A Senior Capstone Project
-The Official Repository of LaMeater
+# LaMeater Database Repository
+Files Included 
+1. LaMeater Database Source Code (Written in Android Studio and Spring STS)
+2. LaMeater Database SQL Script
 
-Team Members:
-1. Horde Male
-2. Horde Female
-3. a Diva
-4. a Ruben Sandwich
-5. the Other Guy
+# How To Use
 
-# About The Project:
- LaMeater is a platform to detect when a user's meat reaches its desired internal temperature. Several technologies will be featured, such as:
- - Android Mobile App Interface
- - Arduino Microcontroller Temperature Data Reception Interface
- - SQL Database of Meat Information
+1. Run SQL Script through MySQL WorkBench
+2. Run Source Code in Android Studio or STS (I reccomend STS)
