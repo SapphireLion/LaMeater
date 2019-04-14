@@ -1,0 +1,31 @@
+package bambino.db.main;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
+import bambino.db.player.Player;
+import bambino.db.playerrepository.PlayerRepository;
+
+@RestController    // This means that this class is a Controller
+@RequestMapping(value="/player") // This means URL's start with /demo (after Application path)
+public class MainController {
+    @Autowired PlayerRepository playerRepository;
+
+    @GetMapping(value="/all")
+    public List<Player> getall(){
+        return playerRepository.findAll();
+    }
+
+    @PostMapping(value="/load")
+    public List<Player> persist(@RequestBody final Player player){
+        playerRepository.save(player);
+        return playerRepository.findAll();
+    }
+
+}

@@ -1,0 +1,5 @@
+package bambino.db.playerrepository;
+
+public class PlayerRepository {
+
+}
