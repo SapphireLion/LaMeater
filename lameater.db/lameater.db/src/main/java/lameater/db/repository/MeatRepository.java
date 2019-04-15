@@ -15,15 +15,15 @@ import lameater.db.meat.Meat;
 public interface MeatRepository extends JpaRepository<Meat,Integer>{
 
 	// Query for Meat By Name
-	@Query(value= "FROM meats WHERE NAME = :name")
+	@Query(value= "FROM meats WHERE name = :name")
 	List<Meat> findByName(@Param("name") String name);
 	
 	//Query for Meat by Category
-	@Query(value = "FROM meats WHERE Category:=category")
+	@Query(value = "FROM meats WHERE category:=category")
 	List<Meat> findbyTeam(@Param("category") String category);
 	
 	//Query for Meat by Category AND Name
-	@Query(value = "FROM meats WHERE CATEGORY = :category AND NAME = :name")
+	@Query(value = "FROM meats WHERE category = :category AND NAME = :name")
 	Meat findByCategoryAndName(@Param("category") String category, @Param("name") String name);
 	
 	//Query for Update User Temp
