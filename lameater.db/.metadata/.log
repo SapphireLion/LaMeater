@@ -3204,3 +3204,9 @@ Caused by: org.gradle.api.plugins.UnknownPluginException: Plugin with id 'jar' n
 
 !ENTRY org.eclipse.ui 2 2 2019-04-14 19:01:57.953
 !MESSAGE org.eclipse.contribution.xref.ui.views.XReferenceView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-04-14 19:51:10.396
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-04-14 19:51:10.396
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
