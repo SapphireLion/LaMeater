@@ -1,9 +1,11 @@
 package com.example.lameater.db;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,49 +13,39 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDB;
-    EditText editName, editCategory, editTemp;
-    Button btnViewCategories;
+    SQLiteDatabase db;
+    EditText query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         myDB = new DatabaseHelper(this);
+        db = myDB.getReadableDatabase();
+        query = findViewById(R.id.query);
 
-        btnViewCategories = (Button) findViewById(R.id.button_ViewCategories);
-
-        viewCategories();
     }
 
-    public void viewCategories(){
-        btnViewCategories.setOnClickListener(
-            new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Cursor res = myDB.getAllCategories();
-                    if (res.getCount()==0){
-                        //show messages
-                        ShowMessage("Error","Nothing Found. Victory for the Alliance.");
-                        return;
-                    }
-
-                    StringBuffer buffer = new StringBuffer();
-                    while(res.moveToNext()){
-                        buffer.append("Name: "+ res.getString(1)+"\n");
-                    }
-
-                    //Show all Categories\
-                    ShowMessage("For the Horde! Categories", buffer.toString());
-
+    public void doQuery(View v) {
+        String queryString = query.getText().toString();
+        Cursor res = db.rawQuery(queryString, null);
+        for (int i = 0; i < res.getCount(); i++) {
+            res.moveToPosition(i);
+            String row = "";
+            for (int j = 0; j < res.getColumnCount(); j++) {
+                switch (res.getType(j)) {
+                    case Cursor.FIELD_TYPE_INTEGER:
+                        row += res.getInt(j) + "\t";
+                        break;
+                    case Cursor.FIELD_TYPE_STRING:
+                        row += res.getString(j) + "\t";
+                        break;
                 }
+            }
+            Log.d("QUERY", row);
+        }
+    }
 
-            });
-        }
-        public void ShowMessage(String title, String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
-        }
 }
