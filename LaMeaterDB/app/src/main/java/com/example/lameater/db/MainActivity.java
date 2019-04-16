@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     Cursor res = myDB.getAllCategories();
                     if (res.getCount()==0){
                         //show messages
-                        ShowMessage("Error","Nothing Found");
+                        ShowMessage("Error","Nothing Found. Victory for the Alliance.");
                         return;
                     }
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     //Show all Categories\
-                    ShowMessage("Categories", buffer.toString());
+                    ShowMessage("For the Horde! Categories", buffer.toString());
 
                 }
 
