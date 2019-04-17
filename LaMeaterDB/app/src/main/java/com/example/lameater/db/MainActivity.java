@@ -21,11 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         myDB = new DatabaseHelper(this);
         db = myDB.getReadableDatabase();
         query = findViewById(R.id.query);
-
     }
 
     public void doQuery(View v) {
