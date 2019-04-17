@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">LaMeater.Spinner</string>
+
+    <string-array name="categories">
+        <item>David Cooper</item>
+        <item>Ruben Perez</item>
+        <item>Jay Sui</item>
+        <item>Kevin Torres</item>
+        <item>Allie Wallace</item>
+    </string-array>
+
+    <string-array name="david">
+        <item>For The Horde</item>
+        <item>Alliance Scum</item>
+    </string-array>
+
+    <string-array name="empty"></string-array>
+
+    <string-array name="kevin">
+        <item>Dark Souls</item>
+        <item>Bloddborne</item>
+        <item>Sekiro: Shadows Die Twice</item>
+    </string-array>
+
+    <string-array name="jay">
+        <item>Fuck you</item>
+        <item>Fuck you</item>
+        <item>Fuck you</item>
+    </string-array>
+
+    <string-array name="allie">
+        <item>Go</item>
+        <item>Back</item>
+        <item>To</item>
+        <item>Sleep</item>
+    </string-array>
+
+    <string-array name="ruben">
+        <item>Fuck</item>
+        <item>This</item>
+        <item>I am</item>
+        <item>Out</item>
+    </string-array>
+
+    <string name="DarkSouls">Dark Souls</string>
+</resources>
