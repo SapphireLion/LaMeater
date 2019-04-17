@@ -18,11 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void sendDarkSouls(View view) {
-        Intent darkSoulsIntent = new Intent(this, DarkSoulsMessageActivity.class);
 
-        startActivity(darkSoulsIntent);
-    }
 
 
 }
