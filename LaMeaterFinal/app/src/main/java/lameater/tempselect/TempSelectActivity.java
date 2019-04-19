@@ -1,11 +1,16 @@
 package lameater.tempselect;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -18,6 +23,7 @@ public class TempSelectActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_temp_select);
         int cid = 0, mid = 0, tid = 0;
         String[] MyMenu = new String[5];
+        float ReccomendedTemp = (float) 90.0;
 
         // Change These For Spinner Options
         MyMenu[0] = "Dark Magician";
@@ -29,8 +35,13 @@ public class TempSelectActivity extends AppCompatActivity implements AdapterView
         // Put Spinner in Activity
         doSpinner(this, cid, mid, tid, MyMenu);
 
+
+
         // Put ImageView in Activity
         doImageView(1,1);
+
+        // Put User Temp Box in Activity
+        doUserTextView(ReccomendedTemp);
 
     }
 
@@ -49,6 +60,47 @@ public class TempSelectActivity extends AppCompatActivity implements AdapterView
         String drawableName = "dick_"+cid + "_" + mid;
         int MeatPicResourceId = this.getResources().getIdentifier(drawableName, "drawable", this.getPackageName());
         meatView.setImageResource(MeatPicResourceId);
+    }
+
+    public void doUserTextView(final float ReccomendedTemp){
+
+        final EditText UserTempText = (EditText) findViewById(R.id.UserTempBox);
+        Button StartButton = (Button) findViewById(R.id.StartCheckTempButton);
+        StartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float UserTemp;
+                UserTemp = Float.valueOf(UserTempText.getText().toString());
+
+                // Print Warning if UserTemp < ReccomendedTemp
+                if (UserTemp<ReccomendedTemp) {
+                    AlertDialog.Builder AlertTempBuilder = new AlertDialog.Builder(TempSelectActivity.this);
+                    AlertTempBuilder.setMessage("The temperature you have entered is below the FDA Reccomended Temperature. Eating under-cooked meats can result in disease. Do you with to continue?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    BackToMain();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                }
+                else { //Otherwise start Checking Temp
+                    BackToMain();
+                }
+            }
+        });
+
+
+    }
+
+    private void BackToMain() {
+        startActivity((new Intent(this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
     }
 
     @Override
