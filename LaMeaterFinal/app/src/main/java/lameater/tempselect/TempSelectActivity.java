@@ -62,42 +62,41 @@ public class TempSelectActivity extends AppCompatActivity implements AdapterView
         meatView.setImageResource(MeatPicResourceId);
     }
 
-    public void doUserTextView(final float ReccomendedTemp){
-
+    public void doUserTextView(final float ReccomendedTemp) {
+        final float[] UserTemp = new float[1];
         final EditText UserTempText = (EditText) findViewById(R.id.UserTempBox);
         Button StartButton = (Button) findViewById(R.id.StartCheckTempButton);
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float UserTemp;
-                UserTemp = Float.valueOf(UserTempText.getText().toString());
 
+                UserTemp[0] = Float.valueOf(UserTempText.getText().toString());
                 // Print Warning if UserTemp < ReccomendedTemp
-                if (UserTemp<ReccomendedTemp) {
-                    AlertDialog.Builder AlertTempBuilder = new AlertDialog.Builder(TempSelectActivity.this);
-                    AlertTempBuilder.setMessage("The temperature you have entered is below the FDA Reccomended Temperature. Eating under-cooked meats can result in disease. Do you with to continue?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    BackToMain();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                }
-                else { //Otherwise start Checking Temp
-                    BackToMain();
-                }
             }
         });
 
-
+        if (UserTemp[0] < ReccomendedTemp) {
+            AlertDialog.Builder AlertTempBuilder = new AlertDialog.Builder(TempSelectActivity.this);
+            AlertTempBuilder.setMessage("The temperature you have entered is below the FDA Reccomended Temperature. Eating under-cooked meats can result in disease. Do you with to continue?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            BackToMain();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+        }
+        else { //Otherwise start Checking Temp
+            BackToMain();
+        }
     }
+
 
     private void BackToMain() {
         startActivity((new Intent(this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
